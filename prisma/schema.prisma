@@ -20,6 +20,18 @@ model Example {
   updatedAt DateTime @updatedAt
 }
 
+model Auction {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  author String @default("System")
+  startsAt DateTime @default(now())
+  endsAt DateTime @default(now())
+  bet Int @default(1)
+  isSold Boolean @default(false)
+  soldTo String @default("")
+}
+
 // Necessary for Next auth
 model Account {
   id                String  @id @default(cuid())
