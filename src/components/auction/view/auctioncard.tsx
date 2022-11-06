@@ -12,11 +12,17 @@ interface AuctionDataType {
   soldTo: string;
 }
 
-const AuctionCard = ({ data }: { data: AuctionDataType }) => {
+const AuctionCard = ({
+  data,
+  refetch,
+}: {
+  data: AuctionDataType;
+  refetch: () => void;
+}) => {
   return (
     <>
       <div className="flex flex-row-reverse gap-2">
-        <AuctionDetails data={data} />
+        <AuctionDetails data={data} refetch={refetch} />
         <RecentBids />
       </div>
     </>

@@ -1,15 +1,20 @@
 import { trpc } from "../../../utils/trpc";
 import { useRef } from "react";
+import { useForceUpdate } from "../../hooks/useForceUpdate";
 
 const BetForm = ({
   currentBet,
   auctionId,
+  refetch,
 }: {
   currentBet: number;
   auctionId: number;
+  refetch: () => void;
 }) => {
   const betRef = useRef<HTMLInputElement>(null);
   const betMutation = trpc.auctions.bet.useMutation();
+
+  const rerender = useForceUpdate();
 
   async function bet() {
     if (betRef.current != null) {
@@ -21,6 +26,7 @@ const BetForm = ({
         id: auctionId,
         bet: parseInt(betRef.current.value),
       });
+      refetch();
       betRef.current.focus();
     } else {
       alert("Error whilst trying to read BetRef. See Console for more Info.");

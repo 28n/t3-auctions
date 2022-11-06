@@ -21,7 +21,13 @@ const formatter = new Intl.NumberFormat("de-DE", {
   maximumFractionDigits: 0,
 });
 
-const AuctionDetails = ({ data }: { data: AuctionDataType }) => {
+const AuctionDetails = ({
+  data,
+  refetch,
+}: {
+  data: AuctionDataType;
+  refetch: () => void;
+}) => {
   return (
     <>
       <div className="flex flex-grow flex-col items-start px-8">
@@ -45,7 +51,11 @@ const AuctionDetails = ({ data }: { data: AuctionDataType }) => {
             </p>
           </div>
         </div>
-        <BetForm currentBet={data?.bet} auctionId={data?.id} />
+        <BetForm
+          currentBet={data?.bet}
+          auctionId={data?.id}
+          refetch={refetch}
+        />
         <div className="w-full">
           <span className="text-lg font-semibold text-blue-500">
             Artikelbeschreibung
